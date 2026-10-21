@@ -1668,6 +1668,8 @@ The response to a `requestConsent` request is usually a 201 Accepted
 that does not wish to reveal if a user is not found can respond with a 201
 Accepted. Likewise in response to a `cancel` which has no `request` matching the
 `ConsentScope`, a 201 Accepted is sent and no further action is taken.
+A `requestConsent` whose `consentOperation` is not `request` or `cancel` gets a
+422 Unprocessable Content response.
 
 ~~~ tls
 enum {
@@ -1731,6 +1733,8 @@ the `updateConsent` was received), optionally a 404 Not Found (indicating the
 `requesterUri` is unknown), or a 500-class response. The response code
 merely indicates that the request was received. A provider that does not
 wish to reveal if a user is not found can respond with a 201 Accepted.
+An `updateConsent` whose `consentOperation` is not `grant` or `revoke` gets a
+422 Unprocessable Content response.
 
 > **NOTE**: Revoking consent for a user might be privacy sensitive. If this
 > is the case the target provider does not need to send a `revoke` to inform
