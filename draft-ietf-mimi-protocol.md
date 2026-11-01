@@ -448,7 +448,7 @@ ClientC1       ServerC         ServerA         ServerB         ClientB*  ClientC
   |               |               |               |               |         |         |
 
 ClientC1->ServerC: [[ MLSMessage(PrivateMessage) ]]
-ServerC->ServerA: POST 
+ServerC->ServerA: POST
     /submitMessage/a.example/r/clubhouse MLSMessage(PrivateMessage)
 ServerA: Verifies that message is allowed
 ServerA->ServerC: POST /notify/a.example/r/clubhouse Message{ MLSMessage(PrivateMessage) }
