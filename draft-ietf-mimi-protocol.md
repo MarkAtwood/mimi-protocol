@@ -2538,7 +2538,7 @@ directory document, which is `application/json`, and the response to
 - Intended usage: COMMON
 - Restrictions on usage: none
 - Author: See the Authors' Addresses section of RFCXXXX
-- Change controller: IETF
+- Change controller: Internet Engineering Task Force (iesg@ietf.org)
 
 
 --- back
