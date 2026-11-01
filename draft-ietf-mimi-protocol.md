@@ -211,10 +211,10 @@ The protocol layering of the MIMI transport protocol is as follows:
 ~~~
 {: #fig-layers title="MIMI protocol layering" }
 
-MIMI uses MLS for end-to-end security, using the MLS AppDataUpdate proposal type to
-efficiently synchronize room state across the clients involved in a room
-{{!RFC9420}} {{!I-D.ietf-mls-extensions}}. The MIMI transport is based on HTTPS
-over mutually-authenticated TLS.
+MIMI uses MLS {{!RFC9420}} for end-to-end security, using the MLS AppDataUpdate
+proposal type {{!I-D.ietf-mls-extensions}} to efficiently synchronize room state
+across the clients involved in a room. The MIMI transport is based on HTTPS over
+mutually-authenticated TLS.
 
 # Example protocol flow
 
