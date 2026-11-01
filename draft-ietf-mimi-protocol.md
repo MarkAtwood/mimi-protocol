@@ -1667,7 +1667,13 @@ The response to a `requestConsent` request is usually a 201 Accepted
 201 response code merely indicates that the request was received. A provider
 that does not wish to reveal if a user is not found can respond with a 201
 Accepted. Likewise in response to a `cancel` which has no `request` matching the
-`ConsentScope`, a 201 Accepted is sent and no further action is taken.
+The response to a `requestConsent` request is usually a 202 Accepted
+(indicating the `requestConsent` was received), optionally a 404 Not Found
+(indicating the `targetUri` is unknown), or a 500-class response. The
+202 response code merely indicates that the request was received. A provider
+that does not wish to reveal if a user is not found can respond with a 202
+Accepted. Likewise in response to a `cancel` which has no `request` matching the
+`ConsentScope`, a 202 Accepted is sent and no further action is taken.
 A `requestConsent` whose `consentOperation` is not `request` or `cancel` gets a
 422 Unprocessable Content response.
 
@@ -1732,7 +1738,11 @@ The response to an `updateConsent` is usually a 201 Accepted (indicating
 the `updateConsent` was received), optionally a 404 Not Found (indicating the
 `requesterUri` is unknown), or a 500-class response. The response code
 merely indicates that the request was received. A provider that does not
-wish to reveal if a user is not found can respond with a 201 Accepted.
+The response to an `updateConsent` is usually a 202 Accepted (indicating
+the `updateConsent` was received), optionally a 404 Not Found (indicating the
+`requesterUri` is unknown), or a 500-class response. The response code
+merely indicates that the request was received. A provider that does not
+wish to reveal if a user is not found can respond with a 202 Accepted.
 An `updateConsent` whose `consentOperation` is not `grant` or `revoke` gets a
 422 Unprocessable Content response.
 
