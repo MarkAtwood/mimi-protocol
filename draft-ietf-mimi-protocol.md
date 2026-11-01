@@ -256,7 +256,8 @@ This operation is local to the service provider, and does not entail any MIMI
 protocol operations.  However, it must establish the initial state of the room,
 which is then the basis for protocol operations related to the room.
 
-For authorization purposes, MIMI uses permissions based on room-defined roles.
+For authorization purposes, MIMI uses permissions based on room-defined roles
+{{?I-D.ietf-mimi-room-policy}}.
 For example, a room might have a role named "admin", which has `canAddParticipant`,
 `canRemoveParticipant`, and `canChangeUserRole` permissions.
 
@@ -447,7 +448,8 @@ ClientC1       ServerC         ServerA         ServerB         ClientB*  ClientC
   |               |               |               |               |         |         |
 
 ClientC1->ServerC: [[ MLSMessage(PrivateMessage) ]]
-ServerC->ServerA: POST /submitMessage/a.example/r/clubhouse MLSMessage(PrivateMessage)
+ServerC->ServerA: POST 
+    /submitMessage/a.example/r/clubhouse MLSMessage(PrivateMessage)
 ServerA: Verifies that message is allowed
 ServerA->ServerC: POST /notify/a.example/r/clubhouse Message{ MLSMessage(PrivateMessage) }
 ServerA->ServerB: POST /notify/a.example/r/clubhouse Message{ MLSMessage(PrivateMessage) }
@@ -462,7 +464,8 @@ ServerC->ClientC*: [[ MLSMessage(PrivateMessage) ]]
 A user removing another user follows the same flow as adding the user.  The
 user performing the removal creates an MLS commit covering Remove proposals for
 all of the removed user's devices, and an AppDataUpdate proposal updating the
-`participant_list` component to remove the removed user from the room's participant list.
+`participant_list` component to remove the removed user from the room's
+participant list.
 
 One's own user leaving is slightly more complicated than removing another user,
 because the leaving user cannot remove all of their devices from the MLS group.
@@ -952,9 +955,9 @@ POST /update/{roomId}
 Any change to the participant list or room policy (including
 authorization policy) is communicated via an `AppDataUpdate` proposal for the
 `participant_list` component or the room policy components
-{{!I-D.ietf-mimi-room-policy}}, respectively. When adding a user, the proposal containing the participant list
-change MUST be committed either before or simultaneously with the corresponding
-MLS operation.
+{{!I-D.ietf-mimi-room-policy}}, respectively. When adding a user, the proposal
+containing the participant list change MUST be committed either before or
+simultaneously with the corresponding MLS operation.
 
 Removing an active user from a participant list or banning an active participant
 likewise also happen simultaneously with any MLS changes made to the commit removing
@@ -1022,10 +1025,10 @@ struct {
 
 
 For example, in the first use case described in the Protocol Overview, Alice creates a Commit
-containing an AppDataUpdate proposal adding Bob (`mimi://b.example/u/bob`), and Add proposals for all
-Bob's MLS clients.  Alice includes the Welcome message which will be sent for
-Bob, a GroupInfo object for the hub provider, and complete `ratchet_tree`
-extension.
+containing an AppDataUpdate proposal adding Bob (`mimi://b.example/u/bob`), and
+Add proposals for all Bob's MLS clients.  Alice includes the Welcome message
+which will be sent for Bob, a GroupInfo object for the hub provider, and
+complete `ratchet_tree` extension.
 
 A handshake message could be sent by the client as an MLS
 `PublicMessage` (which is visible to all providers), or as an MLS
@@ -2508,4 +2511,4 @@ Thanks to Paul Grubbs, Jon Millican, and Julia Len for their reviews of the
 franking mechanism and suggested changes. Thanks to Felix Linker for his
 preliminary [formal methods
 analysis](https://github.com/felixlinker/mimi-franking-tamarin/) of MIMI
-franking.
+franking. Thanks to Mark Atwood for the detailed review.
